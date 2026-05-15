@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04 Modulo de E/S</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-dark-bg text-slate-200 font-sans min-h-screen relative overflow-x-hidden">
+    <!-- Background Gradient Effects -->
+    <div class="fixed inset-0 z-[-1] bg-[radial-gradient(circle_at_15%_50%,rgba(56,189,248,0.15)_0%,transparent_50%),radial-gradient(circle_at_85%_30%,rgba(192,132,252,0.15)_0%,transparent_50%)]"></div>
+
+    <main class="max-w-6xl mx-auto px-6 py-12 flex flex-col gap-12">
+        
+        <!-- Encabezado -->
+        <header class="glass-panel p-10 rounded-3xl relative overflow-hidden text-center md:text-left flex flex-col md:flex-row items-center gap-8 fade-in-up">
+            <div class="absolute top-[-100px] left-[-100px] w-72 h-72 bg-neon-blue/20 rounded-full blur-[60px] z-[-1] transition-transform duration-700 ease-in-out hover:scale-150"></div>
+            <div class="absolute bottom-[-80px] right-[-80px] w-64 h-64 bg-neon-purple/20 rounded-full blur-[60px] z-[-1]"></div>
+            
+            <div class="flex-shrink-0 w-32 h-32 md:w-40 md:h-40 bg-white/5 rounded-full flex items-center justify-center border border-white/10 shadow-[0_0_30px_rgba(56,189,248,0.2)] fade-in-up" style="transition-delay: 200ms;">
+                <span class="text-5xl md:text-6xl font-bold text-neon-blue">04</span>
+            </div>
+            
+            <div class="flex-grow">
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-white to-slate-400 text-transparent bg-clip-text">Módulo de E/S</h1>
+                <div class="flex flex-col gap-2 text-lg text-slate-300">
+                    <p><strong class="text-white">Tema:</strong> Tratamiento de la CPU de las operaciones de E/S. E/S programadas, por interrupciones, acceso directo a memoria (DMA).</p>
+                    <p><strong class="text-white">Autor:</strong> Eduardo Moyano</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Introducción -->
+        <section class="glass-panel p-8 rounded-3xl border-l-4 border-neon-blue relative group cursor-pointer hover:bg-white/5 transition-colors duration-300 fade-in-up">
+            <h2 class="text-3xl font-bold mb-4 text-neon-blue group-hover:translate-x-2 transition-transform">El Desafío de la Sincronización</h2>
+            <blockquote class="text-xl font-light italic text-slate-200 pl-8 relative">
+                <span class="absolute left-0 top-[-20px] text-6xl text-white/10 font-serif group-hover:text-neon-blue/30 transition-colors">"</span>
+                El tratamiento de las operaciones de E/S es el conjunto de técnicas que permiten la comunicación entre el procesador y el mundo exterior. El problema raíz es la disparidad de velocidades: la CPU es millones de veces más rápida que los periféricos. Para resolver esto, evolucionamos a través de tres métodos principales.
+            </blockquote>
+        </section>
+
+        <!-- Tarjetas de Técnicas -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <div class="glass-panel p-8 rounded-3xl relative overflow-hidden transform hover:-translate-y-3 hover:shadow-[0_10px_40px_rgba(250,204,21,0.15)] transition-all duration-300 group cursor-default fade-in-up" style="transition-delay: 100ms;">
+                <div class="absolute top-0 left-0 w-full h-1 bg-neon-yellow group-hover:h-2 transition-all"></div>
+                <div class="h-16 mb-2 flex items-center">
+                    <span class="text-5xl inline-block transform group-hover:scale-125 group-hover:rotate-12 transition-transform duration-300 origin-center">🟡</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-neon-yellow border-b border-white/10 pb-4 group-hover:border-neon-yellow/30 transition-colors">E/S Programada</h3>
+                <div class="space-y-4">
+                    <p><strong class="text-white">Concepto:</strong> La CPU controla la operación y espera activamente <em class="text-neon-yellow">(polling)</em> hasta que el periférico esté listo.</p>
+                    <p><strong class="text-white">Estado de la CPU:</strong> <span class="text-red-500 font-bold bg-red-500/10 px-2 py-1 rounded">Ocupada al 100%</span> en la espera.</p>
+                    <div class="mt-6 p-4 bg-black/20 rounded-2xl border border-transparent group-hover:border-white/5 transition-colors">
+                        <h4 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Casos de Uso Actual</h4>
+                        <ul class="space-y-3">
+                            <li class="flex gap-2"><span class="text-neon-yellow">→</span> <span><strong>Sistemas Embebidos Simples:</strong> Sensores básicos en Arduino.</span></li>
+                            <li class="flex gap-2"><span class="text-neon-yellow">→</span> <span><strong>Arranque del Sistema:</strong> Durante los primeros segundos (BIOS/UEFI).</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel p-8 rounded-3xl relative overflow-hidden transform hover:-translate-y-3 hover:shadow-[0_10px_40px_rgba(74,222,128,0.15)] transition-all duration-300 group cursor-default fade-in-up" style="transition-delay: 200ms;">
+                <div class="absolute top-0 left-0 w-full h-1 bg-neon-green group-hover:h-2 transition-all"></div>
+                <div class="h-16 mb-2 flex items-center">
+                    <span class="text-5xl inline-block transform group-hover:scale-125 group-hover:-rotate-12 transition-transform duration-300 origin-center">🟢</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-neon-green border-b border-white/10 pb-4 group-hover:border-neon-green/30 transition-colors">E/S por Interrupciones</h3>
+                <div class="space-y-4">
+                    <p><strong class="text-white">Concepto:</strong> El dispositivo avisa a la CPU cuando está listo. La CPU realiza un "Cambio de Contexto".</p>
+                    <p><strong class="text-white">Estado de la CPU:</strong> <span class="text-neon-green font-bold bg-neon-green/10 px-2 py-1 rounded">Libre</span> para procesar otras tareas.</p>
+                    <div class="mt-6 p-4 bg-black/20 rounded-2xl border border-transparent group-hover:border-white/5 transition-colors">
+                        <h4 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Casos de Uso Actual</h4>
+                        <ul class="space-y-3">
+                            <li class="flex gap-2"><span class="text-neon-green">→</span> <span><strong>Periféricos de Usuario:</strong> Teclado y Mouse.</span></li>
+                            <li class="flex gap-2"><span class="text-neon-green">→</span> <span><strong>Terminales de Punto de Venta:</strong> Lectores de códigos.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel p-8 rounded-3xl relative overflow-hidden transform hover:-translate-y-3 hover:shadow-[0_10px_40px_rgba(192,132,252,0.15)] transition-all duration-300 group cursor-default fade-in-up" style="transition-delay: 300ms;">
+                <div class="absolute top-0 left-0 w-full h-1 bg-neon-purple group-hover:h-2 transition-all"></div>
+                <div class="h-16 mb-2 flex items-center">
+                    <span class="text-5xl inline-block transform group-hover:scale-125 group-hover:rotate-12 transition-transform duration-300 origin-center">🚀</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-neon-purple border-b border-white/10 pb-4 group-hover:border-neon-purple/30 transition-colors">Acceso Directo a Memoria</h3>
+                <div class="space-y-4">
+                    <p><strong class="text-white">Concepto:</strong> Un controlador mueve datos entre el periférico y la RAM sin pasar por la CPU.</p>
+                    <p><strong class="text-white">Estado de la CPU:</strong> <span class="text-neon-purple font-bold bg-neon-purple/10 px-2 py-1 rounded">Máxima eficiencia</span>. Solo configura.</p>
+                    <div class="mt-6 p-4 bg-black/20 rounded-2xl border border-transparent group-hover:border-white/5 transition-colors">
+                        <h4 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Casos de Uso Actual</h4>
+                        <ul class="space-y-3">
+                            <li class="flex gap-2"><span class="text-neon-purple">→</span> <span><strong>Almacenamiento:</strong> Discos SSD y NVMe.</span></li>
+                            <li class="flex gap-2"><span class="text-neon-purple">→</span> <span><strong>Multimedia:</strong> Streaming 4K, tarjetas de video.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Sección de Video interactivo (Thumbnail en lugar de Iframe roto) -->
+        <section id="video-section" class="glass-panel p-8 md:p-12 rounded-3xl text-center transition-transform duration-500 fade-in-up">
+            <h2 class="text-3xl font-bold mb-8 text-white">Profundizando: Explicación Visual</h2>
+            
+            <div id="video-container" class="relative w-full overflow-hidden rounded-2xl shadow-2xl pb-[56.25%] border border-white/10 group cursor-pointer bg-black">
+                <!-- Miniatura de Youtube HD -->
+                <img src="https://img.youtube.com/vi/dLuhiB1-gCk/maxresdefault.jpg" alt="Video de Arquitectura" class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
+                
+                <!-- Botón de Play animado -->
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-20 h-20 bg-neon-blue/80 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:bg-neon-yellow transition-colors duration-300 shadow-[0_0_30px_rgba(56,189,248,0.5)] group-hover:shadow-[0_0_30px_rgba(250,204,21,0.5)] transform group-hover:scale-110">
+                        <svg class="w-10 h-10 text-white ml-2" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="mt-4 text-slate-400 italic">Haz clic en la imagen para abrir el video (el reproductor externo está desactivado por el autor del video)</p>
+        </section>
+
+        <footer class="text-center text-slate-400 text-sm pb-4">
+            <p>Diseñado para Arquitectura de las Computadoras - <span class="text-slate-300 font-semibold">Eduardo Moyano</span></p>
+        </footer>
+    </main>
+
+    <script type="module" src="/main.js"></script>
+</body>
+</html>
